@@ -60,7 +60,7 @@ def is_known():
 # --------------------- Window Setup --------------------- #
 window = Tk()
 window.title("AssAndPussy")
-window.config(padx=100, pady=100, bg=BOOTY_COLOR)
+window.config(padx=50, pady=50, bg=BOOTY_COLOR)
 
 flip_timer = window.after(3000, func=flip_card)
 
