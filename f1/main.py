@@ -18,12 +18,20 @@ N_TXT_BFG = "#FFC700"
 ACTIVE_B_FG_W = "#FF204E"
 ACTIVE_B_FG_R = "#06D001"
 DATA_FILE = "dt/f_w.csv"
+TO_LEARN_CSV = "dt/to_learn.csv"
 
 # --------------------- Function  --------------------- #
 
-da = pa.read_csv(DATA_FILE)
-to_learn = da.to_dict(orient="records")
+to_learn = {}
 cu_card = {}
+
+try:
+	da = pa.read_csv(TO_LEARN_CSV)
+except FileNotFoundError:
+	da = pa.read_csv(DATA_FILE)
+	to_learn = da.to_dict(orient="records")
+else:
+	to_learn = da.to_dict(orient="records")
 
 
 def next_card():
@@ -40,6 +48,13 @@ def flip_card():
 	canvas.itemconfig(card_title, text="Englez", fill=N_TXT_FG)
 	canvas.itemconfig(card_word, text=cu_card["English"], fill=N_TXT_BFG)
 	canvas.itemconfig(card_bg, image=cb_img)
+
+
+def is_known():
+	to_learn.remove(cu_card)
+	da2 = pa.DataFrame(to_learn)
+	da2.to_csv("dt/to_learn.csv", index=False)
+	next_card()
 
 
 # --------------------- Window Setup --------------------- #
@@ -73,7 +88,7 @@ no_but.grid(row=1, column=0)
 
 r_img = PhotoImage(file=RIGHT)
 yes_but = Button(image=r_img, highlightthickness=0, bg=BOOTY_COLOR, activebackground=ACTIVE_B_FG_R, relief="flat",
-				 command=next_card)
+				 command=is_known)
 yes_but.grid(row=1, column=1)
 
 # --------------------- Window Start Loop --------------------- #
