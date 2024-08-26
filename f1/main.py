@@ -27,11 +27,13 @@ cu_card = {}
 
 
 def next_card():
-	global cu_card
+	global cu_card, flip_timer
+	window.after_cancel(flip_timer)
 	cu_card = ra.choice(to_learn)
 	canvas.itemconfig(card_title, text="French", fill=TXT_FG)
 	canvas.itemconfig(card_word, text=cu_card["French"], fill=TXT_BFG)
 	canvas.itemconfig(card_bg, image=cf_img)
+	flip_timer = window.after(3000, func=flip_card)
 
 
 def flip_card():
@@ -45,7 +47,7 @@ window = Tk()
 window.title("AssAndPussy")
 window.config(padx=100, pady=100, bg=BOOTY_COLOR)
 
-window.after(3000, func=flip_card)
+flip_timer = window.after(3000, func=flip_card)
 
 # --------------------- CanvasObjet --------------------- #
 
