@@ -10,6 +10,8 @@ WRONG = "img/wrong.png"
 RIGHT = "img/right.png"
 TXT_FG = "#F2059F"
 TXT_BFG = "#22BABB"
+ACTIVE_B_FG_W = "#FF204E"
+ACTIVE_B_FG_R = "#06D001"
 
 # --------------------- Window Setup --------------------- #
 window = Tk()
@@ -30,11 +32,11 @@ canvas.grid(row=0, column=0, columnspan=2)
 # --------------------- UI --------------------- #
 
 wr_img = PhotoImage(file=WRONG)
-no_but = Button(image=wr_img, highlightthickness=0, bg=BOOTY_COLOR)
+no_but = Button(image=wr_img, highlightthickness=0, bg=BOOTY_COLOR, activebackground=ACTIVE_B_FG_W, relief="flat")
 no_but.grid(row=1, column=0)
 
 r_img = PhotoImage(file=RIGHT)
-yes_but = Button(image=r_img, highlightthickness=0, bg=BOOTY_COLOR)
+yes_but = Button(image=r_img, highlightthickness=0, bg=BOOTY_COLOR, activebackground=ACTIVE_B_FG_R, relief="flat")
 yes_but.grid(row=1, column=1)
 
 
